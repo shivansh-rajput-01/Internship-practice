@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
-    todo: [],
+    todo: [{id: "abc", task: "demo-task", isDone: false}],
 };
 
 export const todoSlice = createSlice({
@@ -25,9 +25,16 @@ export const todoSlice = createSlice({
                     todo.isDone = true;
                 } 
             });
+        },
+        unMarkAsDone: (state, action) => {
+            state.todo.map((todo) => {
+                if(todo.id === action.payload){
+                    todo.isDone = false;
+                } 
+            });
         }
     }
 });
 
-export const {addTodo, deleteTodo, markAsDone} = todoSlice.actions;
+export const {addTodo, deleteTodo, markAsDone, unMarkAsDone} = todoSlice.actions;
 export default todoSlice.reducer;
